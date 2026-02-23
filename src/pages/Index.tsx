@@ -227,7 +227,7 @@ export default function Index() {
       {/* ══════════════════════════════════════════════════════════
           SERVICES
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-28 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-20">
