@@ -160,7 +160,7 @@ export default function Index() {
                 marginBottom: "22px",
               }}
             >
-              Premium Music. Exceptional Sound.{" "}
+              Exceptional Sound.{" "}
               <span
                 style={{
                   /* "Unmatched Experience" — gradient from lavender to vivid purple */
