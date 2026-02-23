@@ -38,7 +38,7 @@ export default function Cart() {
   }
 
   const subtotal = getCartTotal();
-  const shipping = subtotal > 500 ? 0 : 25;
+  const shipping = subtotal > 6000 ? 0 : 300;
   const tax = subtotal * 0.075; // 7.5% tax
   const total = subtotal + shipping + tax;
 
@@ -135,11 +135,11 @@ export default function Cart() {
                       {/* Price */}
                       <div className="text-right">
                         <p className="text-lg font-bold text-foreground">
-                          ${(item.isRental ? item.rentalPrice : item.price) * item.quantity}
+                          GH₵{((item.isRental ? item.rentalPrice : item.price) * item.quantity).toLocaleString()}
                         </p>
                         {item.isRental && (
                           <p className="text-xs text-muted-foreground">
-                            ${item.rentalPrice}/day
+                            GH₵{item.rentalPrice.toLocaleString()}/day
                           </p>
                         )}
                       </div>
@@ -161,12 +161,12 @@ export default function Cart() {
                 <div className="space-y-4 mb-6 pb-6 border-b border-border">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span className="text-foreground font-semibold">${subtotal.toFixed(2)}</span>
+                    <span className="text-foreground font-semibold">GH₵{subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Shipping</span>
                     <span className="text-foreground font-semibold">
-                      {shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+                      {shipping === 0 ? "FREE" : `GH₵${shipping.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}
                     </span>
                   </div>
                   {shipping === 0 && (
@@ -176,13 +176,13 @@ export default function Cart() {
                   )}
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Tax (7.5%)</span>
-                    <span className="text-foreground font-semibold">${tax.toFixed(2)}</span>
+                    <span className="text-foreground font-semibold">GH₵{tax.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-between mb-6">
                   <span className="text-lg font-bold text-foreground">Total</span>
-                  <span className="text-2xl font-bold text-primary">${total.toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-primary">GH₵{total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                 </div>
 
                 <button

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nConvert all pricing to Ghana Cedis (GH₵)\n\n- Update all product prices from USD to Ghana Cedis (approx 12:1 conversion rate)\n- Guitar: $1,299 → GH₵15,600\n- Drum Kit: $2,499 → GH₵30,000\n- Keyboard: $1,899 → GH₵22,800\n- Saxophone: $2,199 → GH₵26,400\n- Violin: $899 → GH₵10,800\n- Bass Guitar: $1,050 → GH₵12,600\n- Update rental prices proportionally\n- Change all $ symbols to GH₵ throughout the site\n- Update shipping threshold from $500 to GH₵6,000\n- Update shipping cost from $25 to GH₵300\n- Update SAVE25 coupon from $25 to GH₵300\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

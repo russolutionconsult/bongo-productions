@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 
 const COUPON_CODES = {
   WELCOME10: { discount: 0.1, type: "percentage", description: "10% off your order" },
-  SAVE25: { discount: 25, type: "fixed", description: "$25 off" },
+  SAVE25: { discount: 300, type: "fixed", description: "GH₵300 off" },
   FREESHIP: { discount: 0, type: "shipping", description: "Free shipping" },
 };
 
@@ -42,7 +42,7 @@ export default function Checkout() {
   }
 
   const subtotal = getCartTotal();
-  const baseShipping = subtotal > 500 ? 0 : 25;
+  const baseShipping = subtotal > 6000 ? 0 : 300;
   const tax = subtotal * 0.075;
 
   let discount = 0;
@@ -374,7 +374,7 @@ export default function Checkout() {
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-bold text-foreground">
-                            ${(item.isRental ? item.rentalPrice : item.price) * item.quantity}
+                            GH₵{((item.isRental ? item.rentalPrice : item.price) * item.quantity).toLocaleString()}
                           </p>
                         </div>
                       </div>
@@ -424,29 +424,29 @@ export default function Checkout() {
                   <div className="space-y-3 mb-6 pb-6 border-b border-border">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span className="text-foreground font-semibold">${subtotal.toFixed(2)}</span>
+                      <span className="text-foreground font-semibold">GH₵{subtotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                     {discount > 0 && (
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Discount</span>
-                        <span className="text-green-500 font-semibold">-${discount.toFixed(2)}</span>
+                        <span className="text-green-500 font-semibold">-GH₵{discount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                       </div>
                     )}
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Shipping</span>
                       <span className="text-foreground font-semibold">
-                        {shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+                        {shipping === 0 ? "FREE" : `GH₵${shipping.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Tax (7.5%)</span>
-                      <span className="text-foreground font-semibold">${tax.toFixed(2)}</span>
+                      <span className="text-foreground font-semibold">GH₵{tax.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                   </div>
 
                   <div className="flex justify-between mb-6">
                     <span className="text-lg font-bold text-foreground">Total</span>
-                    <span className="text-2xl font-bold text-primary">${total.toFixed(2)}</span>
+                    <span className="text-2xl font-bold text-primary">GH₵{total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                   </div>
 
                   <button

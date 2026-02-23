@@ -111,7 +111,7 @@ export default function ProductDetail() {
                         : "bg-[hsl(240,12%,8%)] border border-border text-muted-foreground hover:border-primary/40"
                     }`}
                   >
-                    Buy ${product.price}
+                    Buy GH₵{product.price.toLocaleString()}
                   </button>
                   <button
                     onClick={() => setPurchaseType("rent")}
@@ -121,7 +121,7 @@ export default function ProductDetail() {
                         : "bg-[hsl(240,12%,8%)] border border-border text-muted-foreground hover:border-primary/40"
                     }`}
                   >
-                    Rent ${product.rentalPrice}/day
+                    Rent GH₵{product.rentalPrice.toLocaleString()}/day
                   </button>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default function ProductDetail() {
               <div className="mb-8">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-bold text-foreground">
-                    ${purchaseType === "buy" ? product.price : product.rentalPrice}
+                    GH₵{(purchaseType === "buy" ? product.price : product.rentalPrice).toLocaleString()}
                   </span>
                   {purchaseType === "rent" && (
                     <span className="text-muted-foreground">/day</span>
@@ -230,7 +230,7 @@ export default function ProductDetail() {
                       <h3 className="font-serif text-base font-semibold text-foreground mb-2">
                         {relatedProduct.name}
                       </h3>
-                      <p className="text-foreground font-bold text-lg">${relatedProduct.price}</p>
+                      <p className="text-foreground font-bold text-lg">GH₵{relatedProduct.price.toLocaleString()}</p>
                     </div>
                   </Link>
                 </ScrollReveal>

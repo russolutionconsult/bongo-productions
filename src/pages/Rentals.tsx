@@ -74,7 +74,7 @@ export default function Rentals() {
                   <p className="text-muted-foreground text-xs leading-relaxed mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-foreground font-bold text-lg">${product.rentalPrice}</span>
+                      <span className="text-foreground font-bold text-lg">GH₵{product.rentalPrice.toLocaleString()}</span>
                       <span className="text-muted-foreground text-xs">/day</span>
                     </div>
                     <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200">

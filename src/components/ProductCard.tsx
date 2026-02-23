@@ -36,7 +36,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           {product.description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-foreground font-bold text-lg">${product.price.toLocaleString()}</span>
+          <span className="text-foreground font-bold text-lg">GH₵{product.price.toLocaleString()}</span>
           <button
             onClick={handleAddToCart}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn"
