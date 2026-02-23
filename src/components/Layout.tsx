@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ShoppingCart, Music, Menu, X } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -13,8 +14,10 @@ const navLinks = [
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const { getCartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const cartCount = getCartCount();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -66,12 +69,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
+            <Link
+              to="/cart"
+              className="relative w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
               aria-label="Cart"
             >
               <ShoppingCart className="w-5 h-5" />
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
             <Link
               to="/booking"
               style={{
