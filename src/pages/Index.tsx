@@ -160,7 +160,19 @@ export default function Index() {
                 marginBottom: "22px",
               }}
             >
-              Exceptional Sound. Unmatched Experience.
+              Your Sound,{" "}
+              <span
+                style={{
+                  /* "Always Perfected" — gradient from lavender to vivid purple */
+                  background: "linear-gradient(135deg, #A78BFA 0%, #8B5CF6 45%, #C084FC 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  fontStyle: "italic",
+                }}
+              >
+                Always Perfected
+              </span>
             </h1>
 
             {/* Sub-copy */}
