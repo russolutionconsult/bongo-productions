@@ -160,20 +160,7 @@ export default function Index() {
                 marginBottom: "22px",
               }}
             >
-              Exceptional Sound.{" "}
-              <span
-                style={{
-                  /* "Unmatched Experience" — gradient from lavender to vivid purple */
-                  background: "linear-gradient(135deg, #A78BFA 0%, #8B5CF6 45%, #C084FC 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  fontStyle: "italic",
-                }}
-              >
-                Unmatched Experience
-              </span>
-              .
+              Exceptional Sound. Unmatched Experience.
             </h1>
 
             {/* Sub-copy */}
