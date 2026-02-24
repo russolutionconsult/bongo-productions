@@ -163,7 +163,7 @@ export default function Index() {
               Your Sound,{" "}
               <span
                 style={{
-                  /* "Perfected" — gradient from lavender to vivid purple */
+                  /* "Always Perfected" — gradient from lavender to vivid purple */
                   background: "linear-gradient(135deg, #A78BFA 0%, #8B5CF6 45%, #C084FC 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -171,7 +171,7 @@ export default function Index() {
                   fontStyle: "italic",
                 }}
               >
-                Perfected
+                Always Perfected
               </span>
             </h1>
 
@@ -227,7 +227,7 @@ export default function Index() {
       {/* ══════════════════════════════════════════════════════════
           SERVICES
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-28 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-20">
@@ -294,7 +294,7 @@ export default function Index() {
               </Link>
             </div>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {featured.map((product, i) => (
               <ScrollReveal key={product.id} delay={i * 0.1}>
                 <ProductCard product={product} />

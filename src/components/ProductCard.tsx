@@ -1,9 +1,21 @@
+import { Link } from "react-router-dom";
 import type { Product } from "@/lib/products";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToCart(product);
+  };
+
   return (
-    <div className="group relative bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer">
+    <Link
+      to={`/product/${product.id}`}
+      className="group relative bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer block"
+    >
       {/* Image */}
       <div className="relative h-52 overflow-hidden bg-[hsl(240,12%,6%)]">
         <img
@@ -24,14 +36,17 @@ const ProductCard = ({ product }: { product: Product }) => {
           {product.description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-foreground font-bold text-lg">${product.price.toLocaleString()}</span>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn">
+          <span className="text-foreground font-bold text-lg">GH₵{product.price.toLocaleString()}</span>
+          <button
+            onClick={handleAddToCart}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn"
+          >
             <ShoppingCart className="w-3.5 h-3.5" />
             Add to Cart
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

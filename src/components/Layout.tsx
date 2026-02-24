@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ShoppingCart, Music, Menu, X } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -13,8 +14,10 @@ const navLinks = [
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const { getCartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const cartCount = getCartCount();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -66,12 +69,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
+            <Link
+              to="/cart"
+              className="relative w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
               aria-label="Cart"
             >
               <ShoppingCart className="w-5 h-5" />
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
             <Link
               to="/booking"
               style={{
@@ -171,7 +180,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span>📞</span>
-                  <span>+233 XX XXX XXXX</span>
+                  <span>+233 26 300 9284</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span>✉️</span>
@@ -199,9 +208,20 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-border text-center">
+          <div className="mt-12 pt-8 border-t border-border text-center space-y-2">
             <p className="text-muted-foreground text-sm">
               © 2026 Bongo Productions. All rights reserved.
+            </p>
+            <p className="text-muted-foreground text-xs">
+              Powered by{" "}
+              <a
+                href="https://russolutionconsult.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 transition-colors font-semibold"
+              >
+                Russolution Consult
+              </a>
             </p>
           </div>
         </div>
