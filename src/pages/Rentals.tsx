@@ -59,7 +59,7 @@ export default function Rentals() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, i) => (
             <ScrollReveal key={product.id} delay={i * 0.07}>
-              <div className="group bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer">
+              <div className="group bg-gradient-card glass-card rounded-none overflow-hidden hover-lift cursor-pointer">
                 <div className="relative h-52 overflow-hidden bg-[hsl(240,12%,6%)]">
                   <img
                     src={product.image}
@@ -77,7 +77,7 @@ export default function Rentals() {
                       <span className="text-foreground font-bold text-lg">GH₵{product.rentalPrice.toLocaleString()}</span>
                       <span className="text-muted-foreground text-xs">/day</span>
                     </div>
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200">
+                    <button className="flex items-center gap-2 px-4 py-2 rounded-none bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200">
                       <ArrowRight className="w-3.5 h-3.5" /> Rent
                     </button>
                   </div>

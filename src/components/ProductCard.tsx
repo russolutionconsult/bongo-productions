@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group relative bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer block"
+      className="group relative bg-gradient-card glass-card rounded-none overflow-hidden hover-lift cursor-pointer block"
     >
       {/* Image */}
       <div className="relative h-52 overflow-hidden bg-[hsl(240,12%,6%)]">
@@ -39,7 +39,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <span className="text-foreground font-bold text-lg">GH₵{product.price.toLocaleString()}</span>
           <button
             onClick={handleAddToCart}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn"
+            className="flex items-center gap-2 px-4 py-2 rounded-none bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn"
           >
             <ShoppingCart className="w-3.5 h-3.5" />
             Add to Cart

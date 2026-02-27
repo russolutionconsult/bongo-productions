@@ -249,7 +249,7 @@ export default function Index() {
               <ScrollReveal key={svc.title} delay={i * 0.15}>
                 <Link
                   to={svc.link}
-                  className="group block rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 h-full"
+                  className="group block rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 h-full text-center flex flex-col items-center"
                   style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(139,92,246,0.35)";
@@ -265,8 +265,8 @@ export default function Index() {
                     <svc.icon className="h-7 w-7" style={{ color: "#8B5CF6" }} />
                   </div>
                   <h3 className="font-serif text-xl font-bold text-white mb-3">{svc.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.48)" }}>{svc.desc}</p>
-                  <div className="flex items-center gap-1 mt-6 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#8B5CF6" }}>
+                  <p className="text-sm leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.48)" }}>{svc.desc}</p>
+                  <div className="flex items-center justify-center gap-1 mt-6 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#8B5CF6" }}>
                     Learn more <ArrowRight className="w-4 h-4" />
                   </div>
                 </Link>
@@ -282,12 +282,10 @@ export default function Index() {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="flex items-end justify-between mb-14">
-              <div>
-                <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B5CF6", marginBottom: "12px" }}>Featured</p>
-                <h2 className="font-serif text-4xl md:text-5xl font-bold text-white">Top Instruments</h2>
-              </div>
-              <Link to="/shop" className="hidden sm:flex items-center gap-2 text-sm font-medium group" style={{ color: "rgba(255,255,255,0.38)" }}
+            <div className="flex flex-col items-center text-center mb-14">
+              <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "#8B5CF6", marginBottom: "12px" }}>Featured</p>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Top Instruments</h2>
+              <Link to="/shop" className="flex items-center gap-2 text-sm font-medium group" style={{ color: "rgba(255,255,255,0.38)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.38)")}>
                 View All <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -301,6 +299,26 @@ export default function Index() {
               </ScrollReveal>
             ))}
           </div>
+
+          {/* View All button below products */}
+          <ScrollReveal>
+            <div className="flex justify-center mt-12">
+              <Link
+                to="/shop"
+                style={btnPrimary}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "#7C3AED";
+                  (e.currentTarget as HTMLElement).style.transform = "scale(1.025)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "#8B5CF6";
+                  (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                }}
+              >
+                View All Products <ArrowRight style={{ width: "15px", height: "15px" }} />
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -313,25 +331,25 @@ export default function Index() {
           — "Book Now →" same primary button style
       ══════════════════════════════════════════════════════════ */}
       <section className="relative py-32 overflow-hidden my-0">
-        {/* Band silhouette image */}
+        {/* Band silhouette image — more visible */}
         <img
           src={bandBg}
           alt="Band performing on stage under purple lights"
           className="absolute inset-0 w-full h-full object-cover"
           style={{
-            filter: "brightness(0.18) saturate(0.5)",
+            filter: "brightness(0.18) saturate(0.8)",
             objectPosition: "center 30%",
           }}
         />
-        {/* Heavy vivid purple overlay — this is what gives the section its distinctive look */}
+        {/* Purple overlay */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 90% 80% at 50% 40%, rgba(120,20,200,0.80) 0%, rgba(80,10,140,0.65) 45%, rgba(20,5,40,0.70) 100%)",
+              "radial-gradient(ellipse 90% 80% at 50% 40%, rgba(60,20,100,0.92) 0%, rgba(46,16,101,0.85) 45%, rgba(15,7,33,0.95) 100%)",
           }}
         />
-        {/* Dark fade at very top and bottom edges */}
+        {/* Top/bottom fade */}
         <div
           className="absolute inset-0"
           style={{
@@ -340,9 +358,29 @@ export default function Index() {
           }}
         />
 
-        <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
+        {/* Floating decorative music notes */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <span className="absolute text-white/10 text-6xl" style={{ top: "15%", left: "8%", transform: "rotate(-15deg)" }}>♪</span>
+          <span className="absolute text-white/8 text-5xl" style={{ top: "25%", right: "10%", transform: "rotate(20deg)" }}>♫</span>
+          <span className="absolute text-white/6 text-7xl" style={{ bottom: "20%", left: "15%", transform: "rotate(10deg)" }}>♬</span>
+          <span className="absolute text-white/8 text-4xl" style={{ bottom: "30%", right: "18%", transform: "rotate(-25deg)" }}>🎵</span>
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <ScrollReveal>
-            <Star className="mx-auto mb-6 w-7 h-7" style={{ color: "#FBBF24", fill: "#FBBF24" }} />
+            {/* Event type badges */}
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              {["🎤 Weddings", "🏢 Corporate", "🎉 Parties", "🎶 Concerts"].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide"
+                  style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.20)", backdropFilter: "blur(4px)" }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
             <h2
               className="font-serif"
               style={{
@@ -355,18 +393,39 @@ export default function Index() {
             >
               Book Our Band for Your Event
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.60)", fontSize: "16px", lineHeight: 1.7, marginBottom: "36px", maxWidth: "480px", margin: "0 auto 36px" }}>
+            <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "16px", lineHeight: 1.7, marginBottom: "28px", maxWidth: "520px", margin: "0 auto 28px" }}>
               From intimate gatherings to grand celebrations, our professional musicians
               bring the perfect sound to every occasion.
             </p>
-            <Link
-              to="/booking"
-              style={btnBandCta}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7C3AED")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#8B5CF6")}
+
+            {/* Mini testimonial */}
+            <div
+              className="mx-auto mb-10 max-w-md rounded-xl px-6 py-4"
+              style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
             >
-              Book Now <ArrowRight style={{ width: "15px", height: "15px" }} />
-            </Link>
+              <p className="text-white/80 text-sm italic leading-relaxed mb-2">
+                "They made our wedding absolutely magical. Everyone was on the dance floor all night!"
+              </p>
+              <p className="text-white/40 text-xs font-medium">— Ama & Kwame, Accra</p>
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/booking"
+                style={{ ...btnBandCta, backgroundColor: "#801919", boxShadow: "0 4px 18px rgba(128,25,25,0.50)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#661414")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#801919")}
+              >
+                Book Now <ArrowRight style={{ width: "15px", height: "15px" }} />
+              </Link>
+              <Link
+                to="/about"
+                className="text-white text-sm font-semibold transition-all flex items-center gap-1.5 px-7 py-3 rounded-[10px] border-2 border-white/30 hover:bg-white/10"
+              >
+                Learn more about us <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </ScrollReveal>
         </div>
       </section>
