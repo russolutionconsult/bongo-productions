@@ -18,21 +18,34 @@ export default function Contact() {
       <title>Contact Us — Bongo Productions</title>
       <meta name="description" content="Get in touch with Bongo Productions. Have a question or ready to get started?" />
 
-      <div className="pt-28 pb-24 px-6 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="section-label mb-3">Contact</p>
-          <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-4">Get in Touch</h1>
-          <p className="text-muted-foreground text-lg max-w-lg leading-relaxed">
-            Have a question or ready to get started? We'd love to hear from you.
-          </p>
-        </ScrollReveal>
+      {/* Hero Banner */}
+      <div className="relative pt-28 pb-20 overflow-hidden flex items-center justify-center min-h-[40vh]">
+        <img
+          src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1600&auto=format&fit=crop&q=80"
+          alt="Music studio mixing console"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "brightness(0.5) saturate(0.8)" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(88,28,135,0.20)] via-transparent to-background" />
+        <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+          <ScrollReveal>
+            <p className="section-label text-center mb-4">Contact</p>
+            <h1 className="font-serif text-5xl md:text-6xl font-bold text-white mb-4">Get in Touch</h1>
+            <p className="text-white/60 text-lg leading-relaxed">
+              Have a question or ready to get started? We'd love to hear from you.
+            </p>
+          </ScrollReveal>
+        </div>
+      </div>
+
+      <div className="px-6 max-w-5xl mx-auto pb-24">
 
         <div className="grid md:grid-cols-2 gap-12 mt-16">
           {/* Contact Info */}
           <ScrollReveal>
             <div className="space-y-6">
               {[
-                { icon: Phone, label: "Phone", value: "+233 XX XXX XXXX" },
+                { icon: Phone, label: "Phone", value: "+233 26 300 9284" },
                 { icon: Mail, label: "Email", value: "info@bongoproductions.com.gh" },
                 { icon: MapPin, label: "Location", value: "Accra, Ghana" },
               ].map((item) => (

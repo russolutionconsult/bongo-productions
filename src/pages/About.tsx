@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const aboutBg = "https://images.unsplash.com/photo-1501386761578-eaa54b01af4f?w=1600&auto=format&fit=crop&q=80";
+const aboutBg = "/about-hero.png";
+const missionBg = "https://images.unsplash.com/photo-1514320298573-73a5e7ec373b?w=1600&auto=format&fit=crop&q=80"; // Crowd at concert / passionate musicians
 
 const stats = [
   { value: "300+", label: "Events Covered" },
@@ -29,11 +30,11 @@ export default function About() {
       <div className="relative min-h-[55vh] flex items-center justify-center overflow-hidden">
         <img
           src={aboutBg}
-          alt="Band on stage"
+          alt="Professional music studio"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: "brightness(0.2) saturate(0.5)" }}
+          style={{ filter: "brightness(0.4) saturate(0.8)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(88,28,135,0.35)] via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(88,28,135,0.2)] via-transparent to-background/90" />
         <div className="relative z-10 text-center px-6 max-w-2xl mx-auto pt-24 pb-20">
           <ScrollReveal>
             <p className="section-label text-center mb-4">About</p>
@@ -55,6 +56,27 @@ export default function About() {
               musicians, sound engineers, and music lovers. We provide premium instruments, professional rental
               services, and unforgettable live band experiences for every occasion.
             </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Mission Banner Section */}
+        <ScrollReveal>
+          <div className="relative h-[400px] rounded-3xl overflow-hidden my-16 group">
+            <img
+              src={missionBg}
+              alt="Our Mission"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              style={{ filter: "brightness(0.3) saturate(0.8)" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent flex items-center px-10 md:px-16">
+              <div className="max-w-md">
+                <h3 className="font-serif text-3xl font-bold text-white mb-4">Our Mission</h3>
+                <p className="text-white/70 leading-relaxed">
+                  To empower every artist and enthusiast with the tools, the stage, and the sound they deserve.
+                  We strive to be the heartbeat of Ghana's musical future.
+                </p>
+              </div>
+            </div>
           </div>
         </ScrollReveal>
 
