@@ -250,13 +250,17 @@ export default function Index() {
                 <Link
                   to={svc.link}
                   className="group block rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 h-full text-center flex flex-col items-center"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                  style={{
+                    background: "linear-gradient(145deg, rgba(46, 16, 101, 0.3) 0%, rgba(15, 7, 33, 0.7) 100%)",
+                    border: "1px solid rgba(139, 92, 246, 0.12)",
+                    backdropFilter: "blur(8px)"
+                  }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(139,92,246,0.35)";
                     (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(139,92,246,0.18)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(139, 92, 246, 0.12)";
                     (e.currentTarget as HTMLElement).style.boxShadow = "none";
                   }}
                 >
@@ -398,10 +402,14 @@ export default function Index() {
               bring the perfect sound to every occasion.
             </p>
 
-            {/* Mini testimonial */}
             <div
-              className="mx-auto mb-10 max-w-md rounded-xl px-6 py-4"
-              style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
+              className="mx-auto mb-10 max-w-md rounded-xl px-6 py-6"
+              style={{
+                background: "linear-gradient(145deg, rgba(139, 92, 246, 0.15) 0%, rgba(46, 16, 101, 0.4) 50%, rgba(15, 7, 33, 0.8) 100%)",
+                border: "1px solid rgba(139, 92, 246, 0.25)",
+                backdropFilter: "blur(12px)",
+                boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)"
+              }}
             >
               <p className="text-white/80 text-sm italic leading-relaxed mb-2">
                 "They made our wedding absolutely magical. Everyone was on the dance floor all night!"
