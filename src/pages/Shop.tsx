@@ -20,19 +20,19 @@ export default function Shop() {
       <meta name="description" content="Browse our curated selection of professional-grade musical instruments." />
 
       {/* Page Header */}
-      <div className="pt-28 pb-12 px-6 max-w-7xl mx-auto">
+      <div className="pt-28 pb-12 px-6 max-w-7xl mx-auto text-center">
         <ScrollReveal>
-          <p className="section-label">Shop</p>
+          <p className="section-label mx-auto">Shop</p>
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-4">
             Musical Instruments
           </h1>
-          <p className="text-muted-foreground text-lg max-w-xl leading-relaxed">
+          <p className="text-muted-foreground text-lg max-w-xl leading-relaxed mx-auto">
             Browse our curated selection of professional-grade instruments.
           </p>
         </ScrollReveal>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap gap-2 mt-10">
+        <div className="flex flex-wrap justify-center gap-2 mt-10">
           {categories.map((cat) => (
             <button
               key={cat}

@@ -19,13 +19,30 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const { getCartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const cartCount = getCartCount();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Determine if background should be active
+      setScrolled(currentScrollY > 20);
+
+      // Handle show/hide on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false); // Scrolling down - hide
+      } else {
+        setIsVisible(true); // Scrolling up - show
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -35,15 +52,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-[rgba(255,255,255,0.92)] backdrop-blur-md border-b border-gray-200 shadow-lg"
-          : "bg-[rgba(255,255,255,0.85)] backdrop-blur-sm"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"
+          } ${scrolled
+            ? "bg-white border-b border-gray-200 shadow-lg py-2"
+            : "bg-white py-4"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-32 flex items-center justify-between">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 transition-all duration-300 flex items-center justify-between ${scrolled ? "h-16" : "h-24 md:h-32"
+          }`}>
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <img src={BongoLogo} alt="Bongo Productions Logo" className="h-32 w-auto object-contain" />
+            <img
+              src={BongoLogo}
+              alt="Bongo Productions Logo"
+              className={`w-auto object-contain transition-all duration-300 ${scrolled ? "h-16" : "h-24 md:h-32"}`}
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -54,10 +77,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <Link
                   key={link.to}
                   to={link.to}
-                  style={isActive ? { color: "#8B5CF6", fontWeight: 700 } : { color: "#000000" }}
-                  className={`pb-1 text-base font-medium hover:text-[#8B5CF6] transition-colors ${isActive ? "border-b-2 border-[#8B5CF6]" : ""}`}
+                  className={`pb-1 text-base font-medium transition-all duration-200 relative group ${isActive ? "text-primary font-bold" : "text-gray-800 hover:text-primary"
+                    }`}
                 >
                   {link.label}
+                  <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    }`} />
                 </Link>
               );
             })}
@@ -102,16 +127,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex md:hidden items-center gap-2">
             <Link
               to="/cart"
-              className="relative w-10 h-10 flex items-center justify-center text-[#8B5CF6]"
+              className="relative w-10 h-10 flex items-center justify-center text-primary hover:text-primary/80 group"
               aria-label="Cart"
             >
-              <ShoppingCart className="w-6 h-6" fill="currentColor" fillOpacity={0.15} />
+              <ShoppingCart className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" fillOpacity={0.15} />
               {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center">
+                <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-lg animate-in zoom-in">
                   {cartCount}
                 </span>
               )}
             </Link>
+
 
             {/* Mobile Menu Toggle */}
             <button
@@ -127,13 +153,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-[rgba(255,255,255,0.95)] backdrop-blur-xl">
-            <nav className="flex flex-col py-4 px-6 gap-1">
+          <div className="md:hidden border-t border-gray-100 bg-white animate-in slide-in-from-top duration-300">
+            <nav className="flex flex-col py-6 px-6 gap-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`py-3 text-sm font-medium border-b border-gray-200 transition-colors hover:text-[#8B5CF6] ${location.pathname === link.to ? "text-[#8B5CF6] font-bold" : "text-gray-700"
+                  className={`py-3 text-base font-medium border-b border-gray-50 transition-colors ${location.pathname === link.to ? "text-primary font-bold" : "text-gray-700 hover:text-primary"
                     }`}
                 >
                   {link.label}
@@ -141,7 +167,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               ))}
               <Link
                 to="/booking"
-                className="mt-4 py-3 rounded-full text-white text-center text-sm font-semibold"
+                className="mt-6 py-4 rounded-xl text-white text-center text-sm font-bold shadow-purple"
                 style={{ backgroundColor: "#801919" }}
               >
                 Book Now
