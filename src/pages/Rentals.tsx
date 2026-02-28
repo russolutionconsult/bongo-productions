@@ -20,13 +20,13 @@ export default function Rentals() {
           style={{ filter: "brightness(0.15) saturate(0.5)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center flex flex-col items-center">
           <ScrollReveal>
             <p className="section-label">Rentals</p>
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-4">
               Rent Instruments
             </h1>
-            <p className="text-muted-foreground text-lg max-w-xl leading-relaxed">
+            <p className="text-muted-foreground text-lg max-w-xl leading-relaxed mx-auto">
               Flexible rental plans for events, studio sessions, or exploring a new instrument.
             </p>
           </ScrollReveal>
