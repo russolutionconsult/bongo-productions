@@ -11,7 +11,7 @@ export default function ProductDetail() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [purchaseType, setPurchaseType] = useState<"buy" | "rent">("buy");
+  const [purchaseType] = useState<"buy" | "rent">("buy");
   const [added, setAdded] = useState(false);
 
   const product = products.find((p) => p.id === id);
