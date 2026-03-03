@@ -99,32 +99,20 @@ export default function ProductDetail() {
 
               <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
 
-              {/* Purchase Type Toggle */}
-              <div className="mb-6">
-                <p className="text-sm font-medium text-foreground mb-3">Purchase Type</p>
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => setPurchaseType("buy")}
-                    className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
-                      purchaseType === "buy"
-                        ? "bg-primary text-white shadow-purple-sm"
-                        : "bg-[hsl(240,12%,8%)] border border-border text-muted-foreground hover:border-primary/40"
-                    }`}
-                  >
-                    Buy GH₵{product.price.toLocaleString()}
-                  </button>
-                  <button
-                    onClick={() => setPurchaseType("rent")}
-                    className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
-                      purchaseType === "rent"
-                        ? "bg-primary text-white shadow-purple-sm"
-                        : "bg-[hsl(240,12%,8%)] border border-border text-muted-foreground hover:border-primary/40"
-                    }`}
-                  >
-                    Rent GH₵{product.rentalPrice.toLocaleString()}/day
-                  </button>
+              {/* Specifications */}
+              {product.specs && product.specs.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Specifications</h3>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                    {product.specs.map((spec, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                        {spec}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              )}
 
               {/* Quantity */}
               <div className="mb-8">
@@ -150,11 +138,8 @@ export default function ProductDetail() {
               <div className="mb-8">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-bold text-foreground">
-                    GH₵{(purchaseType === "buy" ? product.price : product.rentalPrice).toLocaleString()}
+                    GH₵{(product.price * quantity).toLocaleString()}
                   </span>
-                  {purchaseType === "rent" && (
-                    <span className="text-muted-foreground">/day</span>
-                  )}
                 </div>
               </div>
 

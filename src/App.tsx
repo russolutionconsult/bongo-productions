@@ -12,6 +12,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost1 from "./pages/BlogPost1";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import RequestQuote from "./pages/RequestQuote";
+import ReturnPolicy from "./pages/ReturnPolicy";
 
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/top-5-beginner-instruments" element={<BlogPost1 />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/return-policy" element={<ReturnPolicy />} />
+          <Route path="/request-quote" element={<RequestQuote />} />
         </Routes>
       </Router>
     </CartProvider>

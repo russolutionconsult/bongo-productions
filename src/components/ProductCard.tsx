@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Product } from "@/lib/products";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, FileText } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -13,7 +13,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   return (
     <Link
-      to={`/product/${product.id}`}
+      to={product.quoteOnly ? `/request-quote?productId=${product.id}` : `/product/${product.id}`}
       className="group relative bg-gradient-card glass-card rounded-none overflow-hidden hover-lift cursor-pointer block"
     >
       {/* Image */}
@@ -24,6 +24,11 @@ const ProductCard = ({ product }: { product: Product }) => {
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[hsl(240,12%,7%)] via-transparent to-transparent opacity-60" />
+        {product.quoteOnly && (
+          <div className="absolute top-3 left-3 bg-primary/90 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            Quote Only
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -36,14 +41,28 @@ const ProductCard = ({ product }: { product: Product }) => {
           {product.description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-foreground font-bold text-lg">GH₵{product.price.toLocaleString()}</span>
-          <button
-            onClick={handleAddToCart}
-            className="flex items-center gap-2 px-4 py-2 rounded-none bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn"
-          >
-            <ShoppingCart className="w-3.5 h-3.5" />
-            Add to Cart
-          </button>
+          {product.quoteOnly ? (
+            <>
+              <span className="text-muted-foreground text-sm font-medium italic">Custom Pricing</span>
+              <span
+                className="flex items-center gap-2 px-4 py-2 rounded-none border-2 border-primary text-primary text-xs font-bold hover:bg-primary hover:text-white transition-all duration-200"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                Request Quote
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="text-foreground font-bold text-lg">GH₵{product.price.toLocaleString()}</span>
+              <button
+                onClick={handleAddToCart}
+                className="flex items-center gap-2 px-4 py-2 rounded-none bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200 group/btn"
+              >
+                <ShoppingCart className="w-3.5 h-3.5" />
+                Add to Cart
+              </button>
+            </>
+          )}
         </div>
       </div>
     </Link>

@@ -198,11 +198,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div>
               <h4 className="text-sm font-bold text-black mb-5 tracking-wide uppercase">Quick Links</h4>
               <ul className="space-y-3">
-                {["Shop Instruments", "Rent Equipment", "Book a Session", "About Us"].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-gray-600 text-sm hover:text-[#8B5CF6] transition-colors font-medium">
-                      {item}
-                    </a>
+                {[
+                  { label: "Shop Instruments", to: "/shop" },
+                  { label: "Rent Equipment", to: "/rentals" },
+                  { label: "Book a Session", to: "/booking" },
+                  { label: "About Us", to: "/about" }
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link to={item.to} className="text-gray-600 text-sm hover:text-[#8B5CF6] transition-colors font-medium">
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -231,11 +236,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div>
               <h4 className="text-sm font-bold text-black mb-5 tracking-wide uppercase">Legal</h4>
               <ul className="space-y-3">
-                {["Privacy Policy", "Terms of Service"].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-gray-600 text-sm hover:text-[#8B5CF6] transition-colors font-medium">
-                      {item}
-                    </a>
+                {[
+                  { label: "Privacy Policy", to: "/privacy-policy" },
+                  { label: "Terms of Service", to: "/terms-of-service" },
+                  { label: "Return Policy", to: "/return-policy" }
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link to={item.to} className="text-gray-600 text-sm hover:text-[#8B5CF6] transition-colors font-medium">
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
