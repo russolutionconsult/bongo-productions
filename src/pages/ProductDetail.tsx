@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ShoppingCart, Check, Star, Shield, Truck, RefreshCw } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Check, Star, Shield, Truck, RefreshCw, FileText } from "lucide-react";
 import Layout from "@/components/Layout";
 import ScrollReveal from "@/components/ScrollReveal";
 import { products } from "@/lib/products";
@@ -144,7 +144,7 @@ export default function ProductDetail() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3 mb-8">
+              <div className="flex gap-3 mb-4">
                 <button
                   onClick={handleAddToCart}
                   className="flex-1 py-4 rounded-full bg-[hsl(240,12%,8%)] border border-border text-foreground font-semibold hover:border-primary/40 transition-all flex items-center justify-center gap-2"
@@ -166,6 +166,15 @@ export default function ProductDetail() {
                   Buy Now
                 </button>
               </div>
+
+              {/* Request a Quote */}
+              <Link
+                to={`/request-quote?productId=${product.id}`}
+                className="w-full py-4 rounded-full bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition-all flex items-center justify-center gap-2 mb-8"
+              >
+                <FileText className="w-5 h-5" />
+                Request a Quote
+              </Link>
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-3">

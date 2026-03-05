@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ShoppingCart, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { categories, subcategories } from "@/lib/products";
 import BongoLogo from "@/assets/Bongo_Productions_official_logo1.png";
 
 const navLinks = [
@@ -11,16 +12,25 @@ const navLinks = [
   { to: "/booking", label: "Booking" },
   { to: "/contact", label: "Contact" },
   { to: "/blog", label: "Blog" },
-  { to: "/shop", label: "Shop Now" },
 ];
+
+// Categories for the dropdown (exclude "All")
+const shopCategories = categories.filter((c) => c !== "All");
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { getCartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
+  const [mobileShopOpen, setMobileShopOpen] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cartCount = getCartCount();
 
   useEffect(() => {
@@ -46,7 +56,48 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setMenuOpen(false);
+    setMobileShopOpen(false);
   }, [location]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setShopDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setShopDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setShopDropdownOpen(false);
+    }, 200);
+  };
+
+  const handleCategoryClick = (category: string) => {
+    setShopDropdownOpen(false);
+    setHoveredCategory(null);
+    setMenuOpen(false);
+    setMobileShopOpen(false);
+    setMobileExpandedCat(null);
+    navigate(`/shop?category=${encodeURIComponent(category)}`);
+  };
+
+  const handleSubcategoryClick = (category: string, subcategory: string) => {
+    setShopDropdownOpen(false);
+    setHoveredCategory(null);
+    setMenuOpen(false);
+    setMobileShopOpen(false);
+    setMobileExpandedCat(null);
+    navigate(`/shop?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcategory)}`);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -86,6 +137,92 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               );
             })}
+
+            {/* Shop Now with Dropdown */}
+            <div
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+            >
+              <button
+                onClick={() => setShopDropdownOpen(!shopDropdownOpen)}
+                className={`pb-1 text-base font-medium transition-all duration-200 relative group flex items-center gap-1 ${location.pathname === "/shop" ? "text-primary font-bold" : "text-gray-800 hover:text-primary"
+                  }`}
+              >
+                Shop Now
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${shopDropdownOpen ? "rotate-180" : ""}`} />
+                <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full transition-transform duration-300 ${location.pathname === "/shop" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`} />
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute top-full left-0 mt-2 transition-all duration-200 origin-top ${shopDropdownOpen
+                  ? "opacity-100 scale-y-100 pointer-events-auto"
+                  : "opacity-0 scale-y-95 pointer-events-none"
+                  }`}
+              >
+                {/* Main Category Panel */}
+                <div className={`relative w-56 bg-white shadow-2xl border border-gray-100 overflow-visible ${hoveredCategory ? "rounded-l-xl" : "rounded-xl"}`}>
+                  {/* View All */}
+                  <Link
+                    to="/shop"
+                    onClick={() => setShopDropdownOpen(false)}
+                    onMouseEnter={() => setHoveredCategory(null)}
+                    className="flex items-center justify-between px-5 py-3 text-sm font-bold text-primary hover:bg-primary/5 transition-colors border-b border-gray-100"
+                  >
+                    View All Products
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+
+                  {/* Category Items */}
+                  {shopCategories.map((cat) => {
+                    const hasSubs = subcategories[cat] && subcategories[cat].length > 0;
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => handleCategoryClick(cat)}
+                        onMouseEnter={() => setHoveredCategory(hasSubs ? cat : null)}
+                        className={`w-full flex items-center justify-between px-5 py-3 text-sm font-medium transition-colors ${hoveredCategory === cat
+                          ? "bg-primary/5 text-primary"
+                          : "text-gray-700 hover:bg-primary/5 hover:text-primary"
+                          }`}
+                      >
+                        {cat}
+                        {hasSubs && <ChevronRight className="w-3.5 h-3.5" />}
+                      </button>
+                    );
+                  })}
+
+                  {/* Subcategory Flyout — positions itself next to hovered row */}
+                  {hoveredCategory && subcategories[hoveredCategory] && (() => {
+                    const catIndex = shopCategories.indexOf(hoveredCategory);
+                    const topOffset = 45 + catIndex * 44;
+                    return (
+                      <div
+                        className="absolute left-full bg-white rounded-r-xl shadow-2xl border border-l-0 border-gray-100 w-fit min-w-max"
+                        style={{ top: `${topOffset}px` }}
+                        onMouseEnter={() => setHoveredCategory(hoveredCategory)}
+                        onMouseLeave={() => setHoveredCategory(null)}
+                      >
+                        <div className="py-1 flex flex-col">
+                          {subcategories[hoveredCategory].map((sub) => (
+                            <button
+                              key={sub}
+                              onClick={() => handleSubcategoryClick(hoveredCategory, sub)}
+                              className="w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors whitespace-nowrap"
+                            >
+                              {sub}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
           </nav>
 
           {/* Right Actions */}
@@ -165,6 +302,69 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Mobile Shop by Category */}
+              <div className="border-b border-gray-50">
+                <button
+                  onClick={() => setMobileShopOpen(!mobileShopOpen)}
+                  className={`w-full py-3 text-base font-medium transition-colors flex items-center justify-between ${location.pathname === "/shop" ? "text-primary font-bold" : "text-gray-700 hover:text-primary"
+                    }`}
+                >
+                  Shop Now
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileShopOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {mobileShopOpen && (
+                  <div className="pl-4 pb-3 space-y-1 animate-in slide-in-from-top duration-200">
+                    <Link
+                      to="/shop"
+                      className="block py-2 text-sm font-bold text-primary"
+                    >
+                      View All Products
+                    </Link>
+                    {shopCategories.map((cat) => {
+                      const hasSubs = subcategories[cat] && subcategories[cat].length > 0;
+                      return (
+                        <div key={cat}>
+                          <button
+                            onClick={() => {
+                              if (hasSubs) {
+                                setMobileExpandedCat(mobileExpandedCat === cat ? null : cat);
+                              } else {
+                                handleCategoryClick(cat);
+                              }
+                            }}
+                            className="w-full text-left py-2 text-sm text-gray-600 hover:text-primary transition-colors flex items-center justify-between pr-2"
+                          >
+                            <span className="flex items-center gap-2">
+                              <ChevronRight className="w-3 h-3 text-primary/50" />
+                              {cat}
+                            </span>
+                            {hasSubs && (
+                              <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform duration-200 ${mobileExpandedCat === cat ? "rotate-180" : ""}`} />
+                            )}
+                          </button>
+                          {hasSubs && mobileExpandedCat === cat && (
+                            <div className="pl-6 pb-1 space-y-1 animate-in slide-in-from-top duration-150">
+                              {subcategories[cat].map((sub) => (
+                                <button
+                                  key={sub}
+                                  onClick={() => handleSubcategoryClick(cat, sub)}
+                                  className="w-full text-left py-1.5 text-xs text-gray-500 hover:text-primary transition-colors flex items-center gap-1.5"
+                                >
+                                  <span className="w-1 h-1 rounded-full bg-primary/40" />
+                                  {sub}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
               <Link
                 to="/booking"
                 className="mt-6 py-4 rounded-xl text-white text-center text-sm font-bold shadow-purple"
