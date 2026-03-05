@@ -422,6 +422,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   <span>+233 26 300 9284</span>
                 </li>
                 <li className="flex items-start gap-2">
+                  <span>📞</span>
+                  <span>+233 27 217 0261</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span>📞</span>
+                  <span>+233 244 651 174</span>
+                </li>
+                <li className="flex items-start gap-2">
                   <span>✉️</span>
                   <span>info@bongoproductions.com.gh</span>
                 </li>
@@ -451,22 +459,24 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-gray-200 text-center space-y-2">
-            <p className="text-gray-500 text-sm font-medium">
-              © 2026 Bongo Productions. All rights reserved.
-            </p>
-            <p className="text-gray-500 text-xs font-medium">
-              Powered by{" "}
-              <a
-                href="https://russolutionconsult.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 transition-colors font-bold"
-              >
-                Russolution Consult
-              </a>
-            </p>
-          </div>
+        </div>
+
+        {/* Copyright Band */}
+        <div className="bg-[#1E1E2E] py-6 text-center space-y-1">
+          <p className="text-gray-300 text-sm font-medium">
+            © 2026 Bongo Productions. All rights reserved.
+          </p>
+          <p className="text-gray-400 text-xs font-medium">
+            Powered by{" "}
+            <a
+              href="https://russolutionconsult.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#A78BFA] hover:text-[#C4B5FD] transition-colors font-bold"
+            >
+              Russolution Consult
+            </a>
+          </p>
         </div>
       </footer>
     </div>
