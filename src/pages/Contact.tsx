@@ -45,7 +45,7 @@ export default function Contact() {
           <ScrollReveal>
             <div className="space-y-6">
               {[
-                { icon: Phone, label: "Phone", value: "+233 26 300 9284" },
+                { icon: Phone, label: "Phone", value: "+233 26 300 9284\n+233 27 217 0261\n+233 244 651 174" },
                 { icon: Mail, label: "Email", value: "info@bongoproductions.com.gh" },
                 { icon: MapPin, label: "Location", value: "Accra, Ghana" },
               ].map((item) => (
@@ -55,7 +55,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">{item.label}</p>
-                    <p className="text-foreground font-medium">{item.value}</p>
+                    <p className="text-foreground font-medium whitespace-pre-line">{item.value}</p>
                   </div>
                 </div>
               ))}
