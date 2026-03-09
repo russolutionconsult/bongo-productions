@@ -55,6 +55,27 @@ export const products: Product[] = [
       "Rack-Mountable 2U Chassis Design"
     ]
   },
+  {
+    id: "9",
+    name: "Subwoofer Speaker Stack",
+    description: "High-output professional subwoofer stack designed for deep, punchy bass reinforcement in large venues and outdoor concerts. Engineered for maximum impact and clarity at extreme volume levels. Also available for bulk orders, tour packages, or institutional pricing — request a personalized quote.",
+    price: 28500,
+    rentalPrice: 1200,
+    image: "/Subwoofer Speaker Stack.png",
+    imageFit: "cover",
+    category: "Live Sound",
+    categoryLabel: "LIVE SOUND",
+    subcategory: "Speakers",
+    featured: true,
+    specs: [
+      "Dual 18\" High-Excursion Drivers",
+      "4000W Peak / 2000W RMS Power Handling",
+      "Frequency Response: 30Hz - 150Hz",
+      "Maximum SPL: 138dB",
+      "Tour-Grade Birch Plywood Construction",
+      "Integrated Fly-Ware for Array Mounting"
+    ]
+  },
 ];
 
 export const categories = [
