@@ -16,14 +16,12 @@ const ProductCard = ({ product }: { product: Product }) => {
       to={`/product/${product.id}`}
       className="group relative bg-gradient-card glass-card rounded-none overflow-hidden hover-lift cursor-pointer block"
     >
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden bg-[hsl(240,12%,6%)]">
+      <div className={`relative h-52 overflow-hidden ${product.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className={`w-full h-full ${product.imageFit === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-110`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(240,12%,7%)] via-transparent to-transparent opacity-60" />
       </div>
 
       {/* Content */}

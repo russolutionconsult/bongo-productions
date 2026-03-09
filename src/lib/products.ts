@@ -5,6 +5,7 @@ export interface Product {
   price: number;
   rentalPrice: number;
   image: string;
+  imageFit?: "cover" | "contain";
   category: string;
   categoryLabel: string;
   featured: boolean;
@@ -20,6 +21,7 @@ export const products: Product[] = [
     price: 38400,
     rentalPrice: 1500,
     image: "/StageCraft Pro Drum Kit.png",
+    imageFit: "cover",
     category: "Drum & Percussion",
     categoryLabel: "DRUM & PERCUSSION",
     featured: true,
@@ -30,6 +32,27 @@ export const products: Product[] = [
       "Low-Mass Suspension Mount System",
       "High-Gloss Lacquer Finish",
       "Matching 14\" x 6.5\" Snare Drum included"
+    ]
+  },
+  {
+    id: "8",
+    name: "PFX 4CH Audio Professional Amplifier",
+    description: "Professional high-performance 4-channel power amplifier engineered for crystal clear audio reproduction in concert venues, churches, and outdoor events. Features advanced protection circuitry and efficient cooling for sustained high-output performance. Also available for bulk orders, custom installations, or institutional pricing — request a personalized quote.",
+    price: 18500,
+    rentalPrice: 800,
+    image: "/PFX 4CH Audio Professional Amplifier.png",
+    imageFit: "contain",
+    category: "Live Sound",
+    categoryLabel: "LIVE SOUND",
+    subcategory: "Amplifiers",
+    featured: true,
+    specs: [
+      "4-Channel Class D Power Amplification",
+      "4 x 1500 Watts @ 8 Ohms Output",
+      "Advanced Low-Noise Cooling System",
+      "Comprehensive Circuit Protection (Short, Heat, Clipping)",
+      "Balanced XLR Inputs & Speakon Outputs",
+      "Rack-Mountable 2U Chassis Design"
     ]
   },
 ];

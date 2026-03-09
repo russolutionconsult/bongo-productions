@@ -65,14 +65,14 @@ export default function ProductDetail() {
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           {/* Product Image */}
           <ScrollReveal>
-            <div className="relative rounded-2xl overflow-hidden bg-[hsl(240,12%,6%)] border border-border">
+            <div className={`relative rounded-2xl overflow-hidden border border-border ${product.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-[500px] object-cover"
+                className={`w-full h-[500px] ${product.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
               />
               {product.featured && (
-                <div className="absolute top-4 right-4 bg-primary text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                <div className="absolute top-4 right-4 bg-primary text-white text-xs font-semibold px-3 py-1.5 rounded-full z-10">
                   Featured
                 </div>
               )}
@@ -212,11 +212,11 @@ export default function ProductDetail() {
                     to={`/product/${relatedProduct.id}`}
                     className="group block bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift"
                   >
-                    <div className="relative h-52 overflow-hidden bg-[hsl(240,12%,6%)]">
+                    <div className={`relative h-52 overflow-hidden ${relatedProduct.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
                       <img
                         src={relatedProduct.image}
                         alt={relatedProduct.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className={`w-full h-full ${relatedProduct.imageFit === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-110`}
                       />
                     </div>
                     <div className="p-5">
