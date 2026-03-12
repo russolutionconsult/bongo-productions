@@ -20,7 +20,7 @@ const heroBg =
 const bandBg =
   "https://images.unsplash.com/photo-1501386761578-eaa54b01af4f?w=1920&auto=format&fit=crop&q=90";
 
-const featured = products.filter((p) => p.featured);
+const featured = products.filter((p) => p.featured).slice(0, 8);
 
 /* ─────────────────────────────────────────────
    EXACT BUTTON STYLES  (from pixel analysis of the inspiration images)
