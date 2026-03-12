@@ -117,6 +117,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               src={BongoLogo}
               alt="Bongo Productions Logo"
               className={`w-auto object-contain transition-all duration-300 ${scrolled ? "h-16" : "h-24 md:h-32"}`}
+              style={{ imageRendering: "-webkit-optimize-contrast" }}
             />
           </Link>
 
@@ -387,7 +388,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {/* Brand */}
             <div className="md:col-span-1">
               <Link to="/" className="flex items-center gap-2 mb-4">
-                <img src={BongoLogo} alt="Bongo Productions Logo" className="h-24 w-auto object-contain" />
+                <img src={BongoLogo} alt="Bongo Productions Logo" className="h-24 w-auto object-contain" style={{ imageRendering: "-webkit-optimize-contrast" }} />
               </Link>
               <p className="text-gray-600 text-sm leading-relaxed font-medium">
                 Premium musical instruments, rentals, and professional band booking services in Accra, Ghana.
