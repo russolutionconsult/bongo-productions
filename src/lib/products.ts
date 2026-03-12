@@ -100,7 +100,7 @@ export const products: Product[] = [
   },
   {
     id: "11",
-    name: "XD-1080-KM_Black Sparkle.png",
+    name: "XD-1080-KM_Black Sparkle",
     description: "Experience the perfect blend of style and performance with the XD-1080-KM in Black Sparkle. This professional electronic drum module delivers exceptional sound quality and responsive feel, making it ideal for both stage and studio. Also available for bulk orders or institutional pricing — request a personalized quote.",
     price: 15400,
     rentalPrice: 650,
@@ -121,7 +121,7 @@ export const products: Product[] = [
   },
   {
     id: "12",
-    name: "XD-2000-KM_Brushed_Silver.png",
+    name: "XD-2000-KM_Brushed_Silver",
     description: "The XD-2000-KM in Brushed Silver is a powerhouse of electronic percussion technology. Featuring a sleek metallic finish and a massive library of high-fidelity percussion sounds, it's designed for the most demanding drummers. Also available for bulk orders or institutional pricing — request a personalized quote.",
     price: 18200,
     rentalPrice: 800,
@@ -142,7 +142,7 @@ export const products: Product[] = [
   },
   {
     id: "13",
-    name: "XD-2000B-KM_Natural.png",
+    name: "XD-2000B-KM_Natural",
     description: "The XD-2000B-KM Natural brings an organic aesthetic to the digital world. With its natural wood-inspired finish and cutting-edge sampling technology, it provides an authentic drumming experience that looks as good as it sounds. Also available for bulk orders or institutional pricing — request a personalized quote.",
     price: 18900,
     rentalPrice: 850,
@@ -163,7 +163,7 @@ export const products: Product[] = [
   },
   {
     id: "14",
-    name: "XD-2000C-KM_White.png",
+    name: "XD-2000C-KM_White",
     description: "The XD-2000C-KM in elegant White combines minimalist aesthetics with maximalist performance. Featuring the full XD-2000 sound engine, it delivers pristine acoustic and electronic percussion sounds in a striking visual package. Also available for bulk orders or institutional pricing — request a personalized quote.",
     price: 18500,
     rentalPrice: 800,
@@ -184,7 +184,7 @@ export const products: Product[] = [
   },
   {
     id: "15",
-    name: "XD-2000F-KM_Matte Black.png",
+    name: "XD-2000F-KM_Matte Black",
     description: "Stealthy, powerful, and professional — the XD-2000F-KM in Matte Black is the ultimate stage companion. Its anti-glare finish is perfect for live performances under bright lights, while its internal processing ensures every strike is captured with zero latency. Also available for bulk orders or institutional pricing — request a personalized quote.",
     price: 18700,
     rentalPrice: 825,
@@ -205,7 +205,7 @@ export const products: Product[] = [
   },
   {
     id: "16",
-    name: "XD-3000-KM_Black_Wood.png",
+    name: "XD-3000-KM_Black_Wood",
     description: "The flagship XD-3000-KM in Black Wood represents the pinnacle of electronic drumming. With an expanded sample library, enhanced acoustic modeling, and a premium wood-grain finish, it provides the most authentic drumming experience available today. Also available for flagship installations or institutional pricing — request a personalized quote.",
     price: 24500,
     rentalPrice: 1100,
