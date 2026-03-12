@@ -16,8 +16,8 @@ const ProductCard = ({ product }: { product: Product }) => {
       to={`/product/${product.id}`}
       className="group relative bg-gradient-card glass-card rounded-none overflow-hidden hover-lift cursor-pointer block h-full flex flex-col"
     >
-      {/* Fixed-height image area */}
-      <div className={`relative h-52 overflow-hidden shrink-0 ${product.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
+      {/* Responsive image area: 4:3 on mobile, fixed h-52 on sm+ */}
+      <div className={`relative aspect-[4/3] sm:h-52 overflow-hidden shrink-0 ${product.imageFit === 'contain' ? 'bg-white/5' : 'bg-[hsl(240,12%,6%)]'}`}>
         <img
           src={product.image}
           alt={product.name}
