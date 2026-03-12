@@ -298,7 +298,7 @@ export default function Index() {
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {featured.map((product, i) => (
-              <ScrollReveal key={product.id} delay={i * 0.1}>
+              <ScrollReveal key={product.id} delay={i * 0.1} className="h-full">
                 <ProductCard product={product} />
               </ScrollReveal>
             ))}

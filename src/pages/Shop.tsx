@@ -124,7 +124,7 @@ export default function Shop() {
           >
             {filtered.length > 0 ? (
               filtered.map((product, i) => (
-                <ScrollReveal key={product.id} delay={i * 0.07}>
+                <ScrollReveal key={product.id} delay={i * 0.07} className="h-full">
                   <ProductCard product={product} />
                 </ScrollReveal>
               ))

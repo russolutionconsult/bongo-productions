@@ -207,24 +207,26 @@ export default function ProductDetail() {
             </ScrollReveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct, i) => (
-                <ScrollReveal key={relatedProduct.id} delay={i * 0.1}>
+                <ScrollReveal key={relatedProduct.id} delay={i * 0.1} className="h-full">
                   <Link
                     to={`/product/${relatedProduct.id}`}
-                    className="group block bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift"
+                    className="group block bg-gradient-card glass-card rounded-2xl overflow-hidden hover-lift h-full flex flex-col"
                   >
-                    <div className={`relative h-52 overflow-hidden ${relatedProduct.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
+                    <div className={`relative h-52 overflow-hidden shrink-0 ${relatedProduct.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
                       <img
                         src={relatedProduct.image}
                         alt={relatedProduct.name}
                         className={`w-full h-full ${relatedProduct.imageFit === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-110`}
                       />
                     </div>
-                    <div className="p-5">
+                    <div className="p-5 flex flex-col flex-1">
                       <p className="category-badge mb-2">{relatedProduct.categoryLabel}</p>
-                      <h3 className="font-serif text-base font-semibold text-foreground mb-2">
+                      <h3 className="font-serif text-base font-semibold text-foreground mb-2 min-h-[2.75rem]">
                         {relatedProduct.name}
                       </h3>
-                      <p className="text-foreground font-bold text-lg">GH₵{relatedProduct.price.toLocaleString()}</p>
+                      <div className="mt-auto">
+                        <p className="text-foreground font-bold text-lg">GH₵{relatedProduct.price.toLocaleString()}</p>
+                      </div>
                     </div>
                   </Link>
                 </ScrollReveal>

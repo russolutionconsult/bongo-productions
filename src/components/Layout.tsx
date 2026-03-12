@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ShoppingCart, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { categories, subcategories } from "@/lib/products";
-import BongoLogo from "@/assets/Bongo_Productions_official_logo1.png";
+const BongoLogo = "/logo.png";
 
 const navLinks = [
   { to: "/", label: "Start" },

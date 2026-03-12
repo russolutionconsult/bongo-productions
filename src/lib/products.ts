@@ -24,6 +24,7 @@ export const products: Product[] = [
     imageFit: "cover",
     category: "Drum & Percussion",
     categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Drum Sets",
     featured: true,
     specs: [
       "7-Piece Professional Shell Pack",
@@ -41,7 +42,7 @@ export const products: Product[] = [
     price: 18500,
     rentalPrice: 800,
     image: "/PFX 4CH Audio Professional Amplifier.png",
-    imageFit: "contain",
+    imageFit: "cover",
     category: "Live Sound",
     categoryLabel: "LIVE SOUND",
     subcategory: "Amplifiers",
@@ -74,6 +75,153 @@ export const products: Product[] = [
       "Maximum SPL: 138dB",
       "Tour-Grade Birch Plywood Construction",
       "Integrated Fly-Ware for Array Mounting"
+    ]
+  },
+  {
+    id: "10",
+    name: "HDP-S Multipad 2-in-1",
+    description: "Versatile 2-in-1 digital percussion multipad combining realistic drum sounds with expressive sampling capabilities. Ideal for live performances, studio sessions, and practice — offering drummers and percussionists unmatched creative flexibility. Also available for bulk orders, custom configurations, or institutional pricing — request a personalized quote.",
+    price: 12500,
+    rentalPrice: 600,
+    image: "/HDP-S MULTIPAD 2-in1.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Pads and Triggers",
+    featured: true,
+    specs: [
+      "Multi-Zone Velocity-Sensitive Pads",
+      "Built-in High-Quality Sound Module",
+      "USB/MIDI Connectivity for DAW Integration",
+      "Onboard Effects & Looper Function",
+      "Lightweight & Portable Design",
+      "Headphone Output for Silent Practice"
+    ]
+  },
+  {
+    id: "11",
+    name: "XD-1080-KM_Black Sparkle.png",
+    description: "Experience the perfect blend of style and performance with the XD-1080-KM in Black Sparkle. This professional electronic drum module delivers exceptional sound quality and responsive feel, making it ideal for both stage and studio. Also available for bulk orders or institutional pricing — request a personalized quote.",
+    price: 15400,
+    rentalPrice: 650,
+    image: "/XD-1080-KM_Black Sparkle.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Electronic Drums",
+    featured: true,
+    specs: [
+      "Advanced Sound Modeling Engine",
+      "Dynamic Multi-Zone Response",
+      "Premium Black Sparkle Finish",
+      "USB and MIDI Interface",
+      "Preloaded with Professional Kits",
+      "Custom Sample Import Support"
+    ]
+  },
+  {
+    id: "12",
+    name: "XD-2000-KM_Brushed_Silver.png",
+    description: "The XD-2000-KM in Brushed Silver is a powerhouse of electronic percussion technology. Featuring a sleek metallic finish and a massive library of high-fidelity percussion sounds, it's designed for the most demanding drummers. Also available for bulk orders or institutional pricing — request a personalized quote.",
+    price: 18200,
+    rentalPrice: 800,
+    image: "/XD-2000-KM_Brushed_Silver.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Electronic Drums",
+    featured: true,
+    specs: [
+      "High-Performance Percussion Engine",
+      "Low-Latency Sound Processing",
+      "Stunning Brushed Silver Finish",
+      "Comprehensive Loop and FX Section",
+      "Expandable Sound Library",
+      "Professional Touring Hardware Support"
+    ]
+  },
+  {
+    id: "13",
+    name: "XD-2000B-KM_Natural.png",
+    description: "The XD-2000B-KM Natural brings an organic aesthetic to the digital world. With its natural wood-inspired finish and cutting-edge sampling technology, it provides an authentic drumming experience that looks as good as it sounds. Also available for bulk orders or institutional pricing — request a personalized quote.",
+    price: 18900,
+    rentalPrice: 850,
+    image: "/XD-2000B-KM_Natural.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Electronic Drums",
+    featured: true,
+    specs: [
+      "Next-Gen Natural Sound Synthesis",
+      "Optimized Resonance Modeling",
+      "Elegant Natural Finish",
+      "Intuitive Interface with OLED Display",
+      "Multi-Track Recording via USB",
+      "Responsive Performance Pads"
+    ]
+  },
+  {
+    id: "14",
+    name: "XD-2000C-KM_White.png",
+    description: "The XD-2000C-KM in elegant White combines minimalist aesthetics with maximalist performance. Featuring the full XD-2000 sound engine, it delivers pristine acoustic and electronic percussion sounds in a striking visual package. Also available for bulk orders or institutional pricing — request a personalized quote.",
+    price: 18500,
+    rentalPrice: 800,
+    image: "/XD-2000C-KM_White.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Electronic Drums",
+    featured: true,
+    specs: [
+      "High-Clarity Percussion Engine",
+      "Dynamic Mesh Head Response",
+      "Elegant Arctic White Finish",
+      "Built-in Performance Recorder",
+      "Stereo Audio Inputs/Outputs",
+      "Onboard Percussion Mix Controls"
+    ]
+  },
+  {
+    id: "15",
+    name: "XD-2000F-KM_Matte Black.png",
+    description: "Stealthy, powerful, and professional — the XD-2000F-KM in Matte Black is the ultimate stage companion. Its anti-glare finish is perfect for live performances under bright lights, while its internal processing ensures every strike is captured with zero latency. Also available for bulk orders or institutional pricing — request a personalized quote.",
+    price: 18700,
+    rentalPrice: 825,
+    image: "/XD-2000F-KM_Matte Black.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Electronic Drums",
+    featured: true,
+    specs: [
+      "Professional Matte Black Finish",
+      "Zero-Latency Sound Engine",
+      "Optimized for High-Speed Playing",
+      "8 Dual-Zone Performance Pads",
+      "Advanced EQ and Reverb Engine",
+      "Rugged Stage-Ready Construction"
+    ]
+  },
+  {
+    id: "16",
+    name: "XD-3000-KM_Black_Wood.png",
+    description: "The flagship XD-3000-KM in Black Wood represents the pinnacle of electronic drumming. With an expanded sample library, enhanced acoustic modeling, and a premium wood-grain finish, it provides the most authentic drumming experience available today. Also available for flagship installations or institutional pricing — request a personalized quote.",
+    price: 24500,
+    rentalPrice: 1100,
+    image: "/XD-3000-KM_Black_Wood.png",
+    imageFit: "cover",
+    category: "Drum & Percussion",
+    categoryLabel: "DRUM & PERCUSSION",
+    subcategory: "Electronic Drums",
+    featured: true,
+    specs: [
+      "Flagship 3000-Series Sound Engine",
+      "High-Resolution 24-bit Audio",
+      "Premium Black Wood Grain Finish",
+      "Multi-Track USB Audio Interface",
+      "Advanced Positional Sensing",
+      "Full Expansion Support for Extra Pads"
     ]
   },
 ];
