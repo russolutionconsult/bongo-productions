@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ShoppingCart, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { categories, subcategories } from "@/lib/products";
 const BongoLogo = "/logo.png";
 
@@ -20,7 +19,6 @@ const shopCategories = categories.filter((c) => c !== "All");
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { getCartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -31,7 +29,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [mobileExpandedCat, setMobileExpandedCat] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const cartCount = getCartCount();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -229,18 +226,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              to="/cart"
-              className="relative w-9 h-9 rounded-lg flex items-center justify-center text-[#8B5CF6] hover:text-[#7C3AED] hover:bg-purple-50 transition-all"
-              aria-label="Cart"
-            >
-              <ShoppingCart className="w-5 h-5" fill="currentColor" fillOpacity={0.15} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-            <Link
               to="/booking"
               style={{
                 padding: "8px 20px",
@@ -263,18 +248,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           {/* Mobile Actions */}
           <div className="flex md:hidden items-center gap-2">
-            <Link
-              to="/cart"
-              className="relative w-10 h-10 flex items-center justify-center text-primary hover:text-primary/80 group"
-              aria-label="Cart"
-            >
-              <ShoppingCart className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" fillOpacity={0.15} />
-              {cartCount > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-lg animate-in zoom-in">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
 
 
             {/* Mobile Menu Toggle */}

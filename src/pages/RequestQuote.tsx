@@ -10,6 +10,7 @@ export default function RequestQuote() {
     const [searchParams] = useSearchParams();
     const productId = searchParams.get("productId");
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -30,9 +31,33 @@ export default function RequestQuote() {
         }
     }, [product]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+        setIsSubmitting(true);
+
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbybsuaO0L1WmBNOXSz58UNLuBd-ZUiegvN1k2WTldKUCQHF_au0-yMrLuerIn2S59h4/exec";
+
+        try {
+            await fetch(scriptUrl, {
+                method: "POST",
+                mode: "no-cors", // Required for Google Apps Script
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    productName: product?.name || "Unknown Product",
+                    ...form
+                }),
+            });
+
+            // Since mode is no-cors, we can't check response.ok, but we assume success if no error is thrown
+            setSubmitted(true);
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("There was an error submitting your request. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -199,10 +224,15 @@ export default function RequestQuote() {
 
                                         <button
                                             type="submit"
-                                            className="w-full py-4 rounded-full bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-purple-sm flex items-center justify-center gap-2"
+                                            disabled={isSubmitting}
+                                            className={`w-full py-4 rounded-full bg-primary text-white font-bold transition-all shadow-purple-sm flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-primary/90'}`}
                                         >
-                                            <Send className="w-4 h-4" />
-                                            Submit Quote Request
+                                            {isSubmitting ? (
+                                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                            ) : (
+                                                <Send className="w-4 h-4" />
+                                            )}
+                                            {isSubmitting ? "Submitting..." : "Submit Quote Request"}
                                         </button>
                                     </form>
                                 </div>

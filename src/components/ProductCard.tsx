@@ -1,15 +1,8 @@
 import { Link } from "react-router-dom";
 import type { Product } from "@/lib/products";
-import { ShoppingCart, FileText } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { FileText } from "lucide-react";
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addToCart(product);
-  };
 
   return (
     <Link
@@ -37,33 +30,24 @@ const ProductCard = ({ product }: { product: Product }) => {
           {product.description}
         </p>
 
-        {/* Spacer pushes price & buttons to the bottom */}
+        {/* Spacer pushes price to the bottom */}
         <div className="mt-auto">
-          {/* Price */}
-          <div className="mb-3">
+          <div className="mb-1">
             <span className="text-foreground font-bold text-lg">GH₵{product.price.toLocaleString()}</span>
           </div>
-
-          {/* Dual Action Buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleAddToCart}
-              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-none bg-primary/20 border border-primary/30 text-primary text-xs font-semibold hover:bg-primary hover:text-white transition-all duration-200"
-            >
-              <ShoppingCart className="w-3.5 h-3.5" />
-              Add to Cart
-            </button>
-            <Link
-              to={`/request-quote?productId=${product.id}`}
-              onClick={(e) => e.stopPropagation()}
-              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-none bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-all duration-200"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              Get Quote
-            </Link>
-          </div>
         </div>
+
       </div>
+
+      {/* Action Button — Spans full width at the bottom */}
+      <Link
+        to={`/request-quote?productId=${product.id}`}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full flex items-center justify-center gap-2 px-3 py-3.5 bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-all duration-200"
+      >
+        <FileText className="w-4 h-4" />
+        Request for a Quote
+      </Link>
     </Link>
   );
 };
