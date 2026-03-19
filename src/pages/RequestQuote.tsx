@@ -115,11 +115,11 @@ export default function RequestQuote() {
                                 <div className="space-y-6 sticky top-24">
                                     {product ? (
                                         <div className="glass-card rounded-2xl border border-border overflow-hidden">
-                                            <div className={`h-48 overflow-hidden ${product?.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
+                                            <div className="relative aspect-[4/3] overflow-hidden bg-[hsl(240,12%,6%)]">
                                                 <img
                                                     src={selectedVariant ? selectedVariant.image : product?.image}
                                                     alt={selectedVariant ? `${product?.name} - ${selectedVariant.colorName}` : product?.name}
-                                                    className={`w-full h-full ${product?.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
+                                                    className="w-full h-full object-cover"
                                                 />
                                             </div>
                                             <div className="p-6">
