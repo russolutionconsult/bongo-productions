@@ -11,6 +11,13 @@ export interface Product {
   featured: boolean;
   specs?: string[];
   subcategory?: string;
+  variants?: {
+    id: string;
+    colorName: string;
+    colorCode?: string;
+    image: string;
+    description: string;
+  }[];
 }
 
 export const products: Product[] = [
@@ -121,11 +128,11 @@ export const products: Product[] = [
   },
   {
     id: "12",
-    name: "XD-2000-KM_Brushed_Silver",
-    description: "The XD-2000-KM in Brushed Silver is a powerhouse of electronic percussion technology. Featuring a sleek metallic finish and a massive library of high-fidelity percussion sounds, it's designed for the most demanding drummers. Also available for bulk orders or institutional pricing — request a personalized quote.",
+    name: "XD-2000-KM Series Electronic Drum",
+    description: "The XD-2000-KM Series represents a powerhouse of electronic percussion technology. Featuring a massive library of high-fidelity percussion sounds, it's designed for the most demanding drummers. Available in multiple stunning finishes. Also available for bulk orders or institutional pricing — request a personalized quote.",
     price: 18200,
     rentalPrice: 800,
-    image: "/XD-2000-KM_Brushed_Silver.png",
+    image: "/XD-2000-KM_Brushed_Silver.png", // Default image
     imageFit: "contain",
     category: "Drum & Percussion",
     categoryLabel: "DRUM & PERCUSSION",
@@ -134,73 +141,40 @@ export const products: Product[] = [
     specs: [
       "High-Performance Percussion Engine",
       "Low-Latency Sound Processing",
-      "Stunning Brushed Silver Finish",
+      "Multiple Premium Finishes",
       "Comprehensive Loop and FX Section",
       "Expandable Sound Library",
       "Professional Touring Hardware Support"
-    ]
-  },
-  {
-    id: "13",
-    name: "XD-2000B-KM_Natural",
-    description: "The XD-2000B-KM Natural brings an organic aesthetic to the digital world. With its natural wood-inspired finish and cutting-edge sampling technology, it provides an authentic drumming experience that looks as good as it sounds. Also available for bulk orders or institutional pricing — request a personalized quote.",
-    price: 18900,
-    rentalPrice: 850,
-    image: "/XD-2000B-KM_Natural.png",
-    imageFit: "contain",
-    category: "Drum & Percussion",
-    categoryLabel: "DRUM & PERCUSSION",
-    subcategory: "Electronic Drums",
-    featured: true,
-    specs: [
-      "Next-Gen Natural Sound Synthesis",
-      "Optimized Resonance Modeling",
-      "Elegant Natural Finish",
-      "Intuitive Interface with OLED Display",
-      "Multi-Track Recording via USB",
-      "Responsive Performance Pads"
-    ]
-  },
-  {
-    id: "14",
-    name: "XD-2000C-KM_White",
-    description: "The XD-2000C-KM in elegant White combines minimalist aesthetics with maximalist performance. Featuring the full XD-2000 sound engine, it delivers pristine acoustic and electronic percussion sounds in a striking visual package. Also available for bulk orders or institutional pricing — request a personalized quote.",
-    price: 18500,
-    rentalPrice: 800,
-    image: "/XD-2000C-KM_White.png",
-    imageFit: "contain",
-    category: "Drum & Percussion",
-    categoryLabel: "DRUM & PERCUSSION",
-    subcategory: "Electronic Drums",
-    featured: true,
-    specs: [
-      "High-Clarity Percussion Engine",
-      "Dynamic Mesh Head Response",
-      "Elegant Arctic White Finish",
-      "Built-in Performance Recorder",
-      "Stereo Audio Inputs/Outputs",
-      "Onboard Percussion Mix Controls"
-    ]
-  },
-  {
-    id: "15",
-    name: "XD-2000F-KM_Matte Black",
-    description: "Stealthy, powerful, and professional — the XD-2000F-KM in Matte Black is the ultimate stage companion. Its anti-glare finish is perfect for live performances under bright lights, while its internal processing ensures every strike is captured with zero latency. Also available for bulk orders or institutional pricing — request a personalized quote.",
-    price: 18700,
-    rentalPrice: 825,
-    image: "/XD-2000F-KM_Matte Black.png",
-    imageFit: "contain",
-    category: "Drum & Percussion",
-    categoryLabel: "DRUM & PERCUSSION",
-    subcategory: "Electronic Drums",
-    featured: true,
-    specs: [
-      "Professional Matte Black Finish",
-      "Zero-Latency Sound Engine",
-      "Optimized for High-Speed Playing",
-      "8 Dual-Zone Performance Pads",
-      "Advanced EQ and Reverb Engine",
-      "Rugged Stage-Ready Construction"
+    ],
+    variants: [
+      {
+        id: "XD-2000-KM",
+        colorName: "Brushed Silver",
+        colorCode: "#C0C0C0",
+        image: "/XD-2000-KM_Brushed_Silver.png",
+        description: "The XD-2000-KM in Brushed Silver is a powerhouse of electronic percussion technology. Featuring a sleek metallic finish and a massive library of high-fidelity percussion sounds, it's designed for the most demanding drummers. Also available for bulk orders or institutional pricing — request a personalized quote."
+      },
+      {
+        id: "XD-2000B-KM",
+        colorName: "Natural",
+        colorCode: "#DEB887",
+        image: "/XD-2000B-KM_Natural.png",
+        description: "The XD-2000B-KM Natural brings an organic aesthetic to the digital world. With its natural wood-inspired finish and cutting-edge sampling technology, it provides an authentic drumming experience that looks as good as it sounds. Also available for bulk orders or institutional pricing — request a personalized quote."
+      },
+      {
+        id: "XD-2000C-KM",
+        colorName: "White",
+        colorCode: "#FFFFFF",
+        image: "/XD-2000C-KM_White.png",
+        description: "The XD-2000C-KM in elegant White combines minimalist aesthetics with maximalist performance. Featuring the full XD-2000 sound engine, it delivers pristine acoustic and electronic percussion sounds in a striking visual package. Also available for bulk orders or institutional pricing — request a personalized quote."
+      },
+      {
+        id: "XD-2000F-KM",
+        colorName: "Matte Black",
+        colorCode: "#2A2A2A",
+        image: "/XD-2000F-KM_Matte Black.png",
+        description: "Stealthy, powerful, and professional — the XD-2000F-KM in Matte Black is the ultimate stage companion. Its anti-glare finish is perfect for live performances under bright lights, while its internal processing ensures every strike is captured with zero latency. Also available for bulk orders or institutional pricing — request a personalized quote."
+      }
     ]
   },
   {

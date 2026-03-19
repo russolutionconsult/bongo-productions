@@ -9,6 +9,7 @@ import { products } from "@/lib/products";
 export default function RequestQuote() {
     const [searchParams] = useSearchParams();
     const productId = searchParams.get("productId");
+    const variantId = searchParams.get("variantId");
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [form, setForm] = useState({
@@ -21,15 +22,28 @@ export default function RequestQuote() {
     });
 
     const product = products.find((p) => p.id === productId);
+    const [selectedVariant, setSelectedVariant] = useState(
+        product?.variants?.find((v) => v.id === variantId) || product?.variants?.[0] || null
+    );
+
+    useEffect(() => {
+        if (product && variantId) {
+            const variantToSet = product.variants?.find((v) => v.id === variantId);
+            if (variantToSet) {
+                setSelectedVariant(variantToSet);
+            }
+        }
+    }, [product, variantId]);
 
     useEffect(() => {
         if (product) {
+            const productName = selectedVariant ? `${product.name} (${selectedVariant.colorName})` : product.name;
             setForm((prev) => ({
                 ...prev,
-                message: `I would like to request a quote for the ${product.name}.`,
+                message: `I would like to request a quote for the ${productName}.`,
             }));
         }
-    }, [product]);
+    }, [product, selectedVariant]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,10 +56,10 @@ export default function RequestQuote() {
                 method: "POST",
                 mode: "no-cors", // Required for Google Apps Script
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "text/plain;charset=utf-8",
                 },
                 body: JSON.stringify({
-                    productName: product?.name || "Unknown Product",
+                    productName: product ? `${product.name}${selectedVariant ? ` - ${selectedVariant.colorName}` : ''}` : "Unknown Product",
                     ...form
                 }),
             });
@@ -84,7 +98,7 @@ export default function RequestQuote() {
                         </div>
                         <h1 className="font-serif text-3xl font-bold text-white mb-4">Quote Request Sent!</h1>
                         <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                            Thank you for your interest. Our team will review your request for the <strong>{product?.name}</strong> and get back to you with a formal quote within 24 hours.
+                            Thank you for your interest. Our team will review your request for the <strong>{product?.name}{selectedVariant ? ` - ${selectedVariant.colorName}` : ''}</strong> and get back to you with a formal quote within 24 hours.
                         </p>
                         <Link
                             to="/shop"
@@ -103,17 +117,51 @@ export default function RequestQuote() {
                                         <div className="glass-card rounded-2xl border border-border overflow-hidden">
                                             <div className={`h-48 overflow-hidden ${product?.imageFit === 'contain' ? 'bg-white' : 'bg-[hsl(240,12%,6%)]'}`}>
                                                 <img
-                                                    src={product?.image}
-                                                    alt={product?.name}
+                                                    src={selectedVariant ? selectedVariant.image : product?.image}
+                                                    alt={selectedVariant ? `${product?.name} - ${selectedVariant.colorName}` : product?.name}
                                                     className={`w-full h-full ${product?.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
                                                 />
                                             </div>
                                             <div className="p-6">
                                                 <p className="category-badge mb-3">{product.categoryLabel}</p>
-                                                <h2 className="font-serif text-2xl font-bold text-white mb-3">{product.name}</h2>
+                                                <h2 className="font-serif text-2xl font-bold text-white mb-3">
+                                                    {product.name} {selectedVariant && <span className="text-primary text-lg ml-2">({selectedVariant.colorName})</span>}
+                                                </h2>
                                                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                                                    {product.description}
+                                                    {selectedVariant ? selectedVariant.description : product.description}
                                                 </p>
+
+                                                {product.variants && product.variants.length > 0 && (
+                                                    <div className="mb-6">
+                                                        <div className="flex items-center justify-between mb-3">
+                                                            <p className="text-sm font-medium text-foreground">Color / Model:</p>
+                                                            <span className="text-sm text-muted-foreground">{selectedVariant?.colorName}</span>
+                                                        </div>
+                                                        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                                                            {product.variants.map((variant) => (
+                                                                <button
+                                                                    key={variant.id}
+                                                                    type="button"
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        setSelectedVariant(variant);
+                                                                    }}
+                                                                    className={`relative flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${
+                                                                        selectedVariant?.id === variant.id ? 'border-primary' : 'border-border hover:border-primary/50'
+                                                                    }`}
+                                                                    title={variant.colorName}
+                                                                >
+                                                                    <div className={`absolute inset-0 ${product.imageFit === 'contain' ? 'bg-white/5' : 'bg-black/20'}`} />
+                                                                    <img 
+                                                                        src={variant.image} 
+                                                                        alt={variant.colorName}
+                                                                        className="w-full h-full object-contain p-1 relative z-10"
+                                                                    />
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
 
                                                 {product.specs && product.specs.length > 0 && (
                                                     <div>
@@ -158,7 +206,10 @@ export default function RequestQuote() {
                                                 <Package className="w-5 h-5 text-primary" />
                                                 <div>
                                                     <p className="text-xs text-primary uppercase tracking-wider font-bold">Selected Product</p>
-                                                    <p className="text-foreground font-semibold">{product?.name || "No product selected"}</p>
+                                                    <p className="text-foreground font-semibold">
+                                                        {product?.name || "No product selected"}
+                                                        {selectedVariant && ` - ${selectedVariant.colorName}`}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Check, Star, Shield, Truck, RefreshCw, FileText } from "lucide-react";
 import Layout from "@/components/Layout";
@@ -10,6 +10,13 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
 
   const product = products.find((p) => p.id === id);
+  const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || null);
+
+  useEffect(() => {
+    if (product) {
+      setSelectedVariant(product.variants?.[0] || null);
+    }
+  }, [product]);
 
   if (!product) {
     return (
@@ -34,7 +41,7 @@ export default function ProductDetail() {
   return (
     <Layout>
       <title>{product.name} — Bongo Productions</title>
-      <meta name="description" content={product.description} />
+      <meta name="description" content={selectedVariant ? selectedVariant.description : product.description} />
 
       <div className="pt-24 pb-20 px-6 max-w-7xl mx-auto">
         {/* Back Button */}
@@ -52,8 +59,8 @@ export default function ProductDetail() {
           <ScrollReveal>
             <div className={`relative rounded-2xl overflow-hidden border border-border ${product.imageFit === 'contain' ? 'bg-white/5' : 'bg-[hsl(240,12%,6%)]'}`}>
               <img
-                src={product.image}
-                alt={product.name}
+                src={selectedVariant ? selectedVariant.image : product.image}
+                alt={selectedVariant ? `${product.name} - ${selectedVariant.colorName}` : product.name}
                 className={`w-full aspect-[4/3] md:h-[500px] ${product.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
               />
               {product.featured && (
@@ -82,7 +89,38 @@ export default function ProductDetail() {
                 <span className="text-sm text-muted-foreground">(24 reviews)</span>
               </div>
 
-              <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                {selectedVariant ? selectedVariant.description : product.description}
+              </p>
+
+              {/* Variants / Color Slider */}
+              {product.variants && product.variants.length > 0 && (
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-sm font-medium text-foreground">Color / Model:</p>
+                    <span className="text-sm text-muted-foreground">{selectedVariant?.colorName}</span>
+                  </div>
+                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                    {product.variants.map((variant) => (
+                      <button
+                        key={variant.id}
+                        onClick={() => setSelectedVariant(variant)}
+                        className={`relative flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${
+                          selectedVariant?.id === variant.id ? 'border-primary' : 'border-border hover:border-primary/50'
+                        }`}
+                        title={variant.colorName}
+                      >
+                        <div className={`absolute inset-0 ${product.imageFit === 'contain' ? 'bg-white/5' : 'bg-black/20'}`} />
+                        <img 
+                          src={variant.image} 
+                          alt={variant.colorName}
+                          className="w-full h-full object-contain p-1"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Specifications */}
               {product.specs && product.specs.length > 0 && (
@@ -130,7 +168,7 @@ export default function ProductDetail() {
 
               {/* Action Button */}
               <Link
-                to={`/request-quote?productId=${product.id}`}
+                to={`/request-quote?productId=${product.id}${selectedVariant ? `&variantId=${selectedVariant.id}` : ''}`}
                 className="w-full py-4 rounded-full bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition-all flex items-center justify-center gap-2 mb-8"
               >
                 <FileText className="w-5 h-5" />
